@@ -15,10 +15,19 @@ public enum ConsoleColors {
 
     private final String code;
 
+    /**
+     * Constructor
+     * @param code representing the color
+     */
     ConsoleColors(String code) {
         this.code = code;
     }
 
+    /**
+     * Returns the chars representing the color.
+     *
+     * @return color code
+     */
     public String getCode() {
         return code;
     }
