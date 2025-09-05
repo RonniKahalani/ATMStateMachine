@@ -3,7 +3,7 @@ package com.example.atm;
 /**
  * Enum to represent user actions
  */
-enum UserAction {
+public enum UserAction {
     INSERT_CARD,
     ENTER_PIN,
     SELECT_WITHDRAWAL,

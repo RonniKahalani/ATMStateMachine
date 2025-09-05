@@ -4,6 +4,7 @@ package com.example.atm;
  * Class to represent an ATM with state management
  */
 public class ATM {
+    public static final String CURRENT_STATE = "Current state: ";
     private ATMState currentState;
     private double availableBalance; // Simulated account balance
     private double atmCash; // Cash available in com.example.atm.ATM
@@ -209,27 +210,30 @@ public class ATM {
         return currentState;
     }
 
-    // Main method for testing
+    public void printCurrentState() {
+        System.out.println(CURRENT_STATE + currentState);
+    }
+
     /**
      * Main method to simulate ATM operations
      * @param args
      */
     public static void main(String[] args) {
-        ATM atm = new ATM(5000.0); // com.example.atm.ATM with $5000 cash
+        ATM atm = new ATM(5000.0); // ATM with $5000 cash
 
-        // Simulate com.example.atm.ATM usage
-        System.out.println("Current state: " + atm.getCurrentState());
+        // Simulate ATM usage
+        atm.printCurrentState();
         atm.processAction(UserAction.INSERT_CARD, "1234567890123456"); // Valid card
-        System.out.println("Current state: " + atm.getCurrentState());
+        atm.printCurrentState();
         atm.processAction(UserAction.ENTER_PIN, "1234"); // Valid PIN
-        System.out.println("Current state: " + atm.getCurrentState());
+        atm.printCurrentState();
         atm.processAction(UserAction.SELECT_WITHDRAWAL);
-        System.out.println("Current state: " + atm.getCurrentState());
+        atm.printCurrentState();
         atm.processAction(UserAction.WITHDRAW_AMOUNT, "200"); // Withdraw $200
-        System.out.println("Current state: " + atm.getCurrentState());
+        atm.printCurrentState();
         atm.processAction(UserAction.EJECT_CARD);
-        System.out.println("Current state: " + atm.getCurrentState());
+        atm.printCurrentState();
         atm.processAction(UserAction.SHUTDOWN);
-        System.out.println("Current state: " + atm.getCurrentState());
+        atm.printCurrentState();
     }
 }
