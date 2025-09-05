@@ -14,7 +14,7 @@ public class IdleState implements ATMState {
 
             case INSERT_CARD:
                 if (params.length == 0) {
-                    throw new IllegalArgumentException("Invalid card. Please try again.");
+                    throw new IllegalArgumentException("Missing parameter: card number.");
                 }
                 doInsertCard(context, params[0]);
                 break;

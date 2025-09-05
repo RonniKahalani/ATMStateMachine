@@ -14,7 +14,7 @@ public class CardInsertedState implements ATMState {
 
             case ENTER_PIN:
                 if (params.length == 0) {
-                    throw new IllegalArgumentException("Invalid PIN. Try again or eject card.");
+                    throw new IllegalArgumentException("Missing parameter: pin.");
                 }
                 doEnterPin(context, params[0]);
                 break;

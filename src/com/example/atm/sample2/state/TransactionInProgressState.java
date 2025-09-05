@@ -14,7 +14,7 @@ public class TransactionInProgressState implements ATMState {
 
             case WITHDRAW_AMOUNT:
                 if (params.length == 0) {
-                    throw new IllegalArgumentException("Missing amount parameter.");
+                    throw new IllegalArgumentException("Missing parameter: amount.");
                 }
 
                 double amount;

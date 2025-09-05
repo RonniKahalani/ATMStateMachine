@@ -13,7 +13,7 @@ import com.example.atm.util.ConsoleColors;
 /**
  * ATM Demo main class acting as the user interface.
  */
-public class ATMDemo {
+public class ATMMain {
     public static void main(String[] args) {
 
         // Initialize validators
