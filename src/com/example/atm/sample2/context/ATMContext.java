@@ -6,6 +6,8 @@ import com.example.atm.sample2.state.*;
 import com.example.atm.sample2.validator.CardValidator;
 import com.example.atm.sample2.validator.PinValidator;
 
+import java.util.Map;
+
 public class ATMContext {
     private ATMState currentState;
     private double availableBalance;
@@ -15,6 +17,17 @@ public class ATMContext {
     private final CardValidator cardValidator;
     private final PinValidator pinValidator;
     private final TransactionProcessor transactionProcessor;
+
+    /**
+     * A map of all the supported (possible) states
+     */
+    private final Map<Class<? extends ATMState>, ATMStateType> stateMap = Map.of(
+            IdleState.class, ATMStateType.IDLE,
+            CardInsertedState.class, ATMStateType.CARD_INSERTED,
+            PinVerifiedState.class, ATMStateType.PIN_VERIFIED,
+            TransactionInProgressState.class, ATMStateType.TRANSACTION_IN_PROGRESS,
+            OutOfServiceState.class, ATMStateType.OUT_OF_SERVICE
+    );
 
     // Constructor with dependency injection
     public ATMContext(CardValidator cardValidator, PinValidator pinValidator, TransactionProcessor transactionProcessor, double atmCash) {
@@ -39,12 +52,7 @@ public class ATMContext {
     }
 
     public ATMStateType getCurrentStateType() {
-        if (currentState instanceof IdleState) return ATMStateType.IDLE;
-        if (currentState instanceof CardInsertedState) return ATMStateType.CARD_INSERTED;
-        if (currentState instanceof PinVerifiedState) return ATMStateType.PIN_VERIFIED;
-        if (currentState instanceof TransactionInProgressState) return ATMStateType.TRANSACTION_IN_PROGRESS;
-        if (currentState instanceof OutOfServiceState) return ATMStateType.OUT_OF_SERVICE;
-        return null;
+        return stateMap.getOrDefault(currentState.getClass(), null);
     }
 
     public double getAvailableBalance() {
