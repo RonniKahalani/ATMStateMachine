@@ -11,7 +11,7 @@ import com.example.atm.sample2.validator.PinValidatorImpl;
 
 public class ATMDemo {
     public static void main(String[] args) {
-        // Initialize services
+        // Initialize validators
         CardValidator cardValidator = new CardValidatorImpl();
         PinValidator pinValidator = new PinValidatorImpl();
         TransactionProcessor transactionProcessor = new TransactionProcessorImpl();
