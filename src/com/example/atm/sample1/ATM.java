@@ -1,10 +1,11 @@
-package com.example.atm;
+package com.example.atm.sample1;
+
+import com.example.atm.util.ConsoleColors;
 
 /**
  * Class to represent an ATM with state management
  */
 public class ATM {
-    public static final String CURRENT_STATE = "State: ";
     private ATMState currentState;
     private double availableBalance; // Simulated account balance
     private double atmCash; // Cash available in ATM
@@ -260,16 +261,16 @@ public class ATM {
      * Prints the current state to the console
      */
     public void printCurrentState() {
-        System.out.printf("%s%s [%s]\n", ConsoleColors.GREEN, CURRENT_STATE, currentState);
+        System.out.printf("%sState: [%s]\n", ConsoleColors.GREEN.getCode(), currentState);
     }
 
     /**
      * Prints the current state to the console
      */
     public void printToConsole(String message) {
-        System.out.printf("%s%s\n", ConsoleColors.RESET, message);
-        System.out.printf("Card:%b\n", cardValid);
-        System.out.printf("PIN: %b\n", pinCorrect);
+        System.out.printf("%s%s\n", ConsoleColors.RESET.getCode(), message);
+        System.out.printf("Card: %b, PIN: %b\n", cardValid, pinCorrect);
+        System.out.println("-------------------------------------------------------");
     }
 
     /**
@@ -279,6 +280,10 @@ public class ATM {
      */
     public static void main(String[] args) {
         ATM atm = new ATM(5000.0); // ATM with $5000 cash
+
+        System.out.println("*******************************************************");
+        System.out.println("ATM - State Machine Example.");
+        System.out.println("*******************************************************");
 
         // Simulate ATM usage
         atm.printCurrentState();
@@ -298,16 +303,3 @@ public class ATM {
     }
 }
 
-/**
- * Color codes for console texts
- */
-class ConsoleColors {
-    public static final String RESET = "\u001B[0m";
-    public static final String RED = "\u001B[31m";
-    public static final String GREEN = "\u001B[32m";
-    public static final String YELLOW = "\u001B[33m";
-    public static final String BLUE = "\u001B[34m";
-    public static final String PURPLE = "\u001B[35m";
-    public static final String CYAN = "\u001B[36m";
-    public static final String WHITE = "\u001B[37m";
-}

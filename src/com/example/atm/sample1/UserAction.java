@@ -1,4 +1,4 @@
-package com.example.atm;
+package com.example.atm.sample1;
 
 /**
  * Enum to represent user actions
