@@ -8,6 +8,7 @@ import com.example.atm.sample2.validator.CardValidator;
 import com.example.atm.sample2.validator.CardValidatorImpl;
 import com.example.atm.sample2.validator.PinValidator;
 import com.example.atm.sample2.validator.PinValidatorImpl;
+import com.example.atm.util.ConsoleColors;
 
 public class ATMDemo {
     public static void main(String[] args) {
@@ -20,18 +21,22 @@ public class ATMDemo {
         ATMContext atm = new ATMContext(cardValidator, pinValidator, transactionProcessor, 5000.0);
 
         // Simulate ATM usage
-        System.out.println("Current state: " + atm.getCurrentStateType());
+        printCurrentState(atm);
         atm.processAction(UserAction.INSERT_CARD, "1234567890123456"); // Valid card
-        System.out.println("Current state: " + atm.getCurrentStateType());
+        printCurrentState(atm);
         atm.processAction(UserAction.ENTER_PIN, "1234"); // Valid PIN
-        System.out.println("Current state: " + atm.getCurrentStateType());
+        printCurrentState(atm);
         atm.processAction(UserAction.SELECT_WITHDRAWAL);
-        System.out.println("Current state: " + atm.getCurrentStateType());
+        printCurrentState(atm);
         atm.processAction(UserAction.WITHDRAW_AMOUNT, "200"); // Withdraw $200
-        System.out.println("Current state: " + atm.getCurrentStateType());
+        printCurrentState(atm);
         atm.processAction(UserAction.EJECT_CARD);
-        System.out.println("Current state: " + atm.getCurrentStateType());
+        printCurrentState(atm);
         atm.processAction(UserAction.SHUTDOWN);
-        System.out.println("Current state: " + atm.getCurrentStateType());
+        printCurrentState(atm);
+    }
+
+    public static void printCurrentState(ATMContext context) {
+        System.out.printf("%sState [%s]%s\n", ConsoleColors.GREEN.getCode(), context.getCurrentStateType().toString(), ConsoleColors.RESET.getCode());
     }
 }
