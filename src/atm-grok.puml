@@ -1,0 +1,38 @@
+@startuml ATM State Machine
+
+[*] --> IDLE
+
+state IDLE {
+  IDLE : entry / Waiting for card
+  IDLE --> CARD_INSERTED : INSERT_CARD [valid card] / print "Card inserted successfully"
+  IDLE --> IDLE : INSERT_CARD [invalid card] / print "Invalid card"
+  IDLE --> OUT_OF_SERVICE : SHUTDOWN / print "ATM is now out of service"
+}
+
+state CARD_INSERTED {
+  CARD_INSERTED : entry / Awaiting PIN
+  CARD_INSERTED --> PIN_VERIFIED : ENTER_PIN [valid PIN] / print "PIN verified"
+  CARD_INSERTED --> CARD_INSERTED : ENTER_PIN [invalid PIN] / print "Invalid PIN"
+  CARD_INSERTED --> IDLE : EJECT_CARD / print "Card ejected"
+}
+
+state PIN_VERIFIED {
+  PIN_VERIFIED : entry / Ready for transaction
+  PIN_VERIFIED --> TRANSACTION_IN_PROGRESS : SELECT_WITHDRAWAL / print "Withdrawal selected"
+  PIN_VERIFIED --> IDLE : EJECT_CARD / print "Card ejected"
+}
+
+state TRANSACTION_IN_PROGRESS {
+  TRANSACTION_IN_PROGRESS : entry / Processing withdrawal
+  TRANSACTION_IN_PROGRESS --> PIN_VERIFIED : WITHDRAW_AMOUNT [valid amount & sufficient funds] / print "Withdrawal successful"
+  TRANSACTION_IN_PROGRESS --> PIN_VERIFIED : WITHDRAW_AMOUNT [invalid amount or insufficient funds] / print "Withdrawal failed"
+  TRANSACTION_IN_PROGRESS --> OUT_OF_SERVICE : WITHDRAW_AMOUNT [ATM out of cash] / print "ATM is out of cash"
+  TRANSACTION_IN_PROGRESS --> IDLE : EJECT_CARD / print "Card ejected"
+}
+
+state OUT_OF_SERVICE {
+  OUT_OF_SERVICE : entry / No actions allowed
+  OUT_OF_SERVICE : do / print "ATM is out of service"
+}
+
+@enduml
