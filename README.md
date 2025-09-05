@@ -6,17 +6,16 @@ Try to present a real world device and identify the states the device goes throu
 Also help the student understand UML tools line PlantUHL (effective text based UML modelling) and Visual Paradigm (graphical interface)
 
 ## The Learning Process
-- Give every student a chance to think on their own.
-- asked to spend 5 minutes, in silence with no digital device, trying to identify the different states an ATM switches between.
+- Give every student a chance to think on their own in silence with no digital device, trying to identify the different states an ATM switches between.
 After 5 min
 
 ## The introduction
-Explain what an UML State Machine diagram is, notations, operations, conditions and alike.
+Explain the UML State Machine diagram its notations, transitions, activities/actions, conditions and alike.
 
 ![State Notations](/images/state-notations.png)
 
-[Visual Paradigm UML State Diagram](https://www.visual-paradigm.com/guide/uml-unified-modeling-language/what-is-state-machine-diagram/)
-[UML2 State Diagram](https://sparxsystems.com/resources/tutorials/uml2/state-diagram.html)
+- [Visual Paradigm UML State Diagram](https://www.visual-paradigm.com/guide/uml-unified-modeling-language/what-is-state-machine-diagram/)
+- [UML2 State Diagram](https://sparxsystems.com/resources/tutorials/uml2/state-diagram.html)
 
 Ex. For each state identified, write down:
 - Name

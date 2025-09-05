@@ -4,15 +4,16 @@ package com.example.atm;
  * Class to represent an ATM with state management
  */
 public class ATM {
-    public static final String CURRENT_STATE = "Current state: ";
+    public static final String CURRENT_STATE = "State: ";
     private ATMState currentState;
     private double availableBalance; // Simulated account balance
-    private double atmCash; // Cash available in com.example.atm.ATM
+    private double atmCash; // Cash available in ATM
     private boolean cardValid;
     private boolean pinCorrect;
 
     /**
      * Constructor to initialize the ATM with cash
+     *
      * @param atmCash
      */
     public ATM(double atmCash) {
@@ -25,6 +26,7 @@ public class ATM {
 
     /**
      * Process user action based on current state
+     *
      * @param action
      * @param params
      */
@@ -50,6 +52,7 @@ public class ATM {
 
     /**
      * Handle actions in IDLE state
+     *
      * @param action
      * @param params
      */
@@ -59,22 +62,23 @@ public class ATM {
                 if (params.length > 0 && validateCard(params[0])) {
                     cardValid = true;
                     currentState = ATMState.CARD_INSERTED;
-                    System.out.println("Card inserted successfully. Please enter PIN.");
+                    printToConsole("Card inserted successfully. Please enter PIN.");
                 } else {
-                    System.out.println("Invalid card. Please try again.");
+                    printToConsole("Invalid card. Please try again.");
                 }
                 break;
             case SHUTDOWN:
                 currentState = ATMState.OUT_OF_SERVICE;
-                System.out.println("com.example.atm.ATM is now out of service.");
+                printToConsole("ATM is now out of service.");
                 break;
             default:
-                System.out.println("Invalid action. Please insert card.");
+                printToConsole("Invalid action. Please insert card.");
         }
     }
 
     /**
      * Handle actions in CARD_INSERTED state
+     *
      * @param action
      * @param params
      */
@@ -84,23 +88,24 @@ public class ATM {
                 if (params.length > 0 && validatePin(params[0])) {
                     pinCorrect = true;
                     currentState = ATMState.PIN_VERIFIED;
-                    System.out.println("PIN verified. Select transaction.");
+                    printToConsole("PIN verified. Select transaction.");
                 } else {
-                    System.out.println("Invalid PIN. Try again or eject card.");
+                    printToConsole("Invalid PIN. Try again or eject card.");
                 }
                 break;
             case EJECT_CARD:
                 cardValid = false;
                 currentState = ATMState.IDLE;
-                System.out.println("Card ejected. com.example.atm.ATM is idle.");
+                printToConsole("Card ejected. ATM is idle.");
                 break;
             default:
-                System.out.println("Invalid action. Please enter PIN or eject card.");
+                printToConsole("Invalid action. Please enter PIN or eject card.");
         }
     }
 
     /**
      * Handle actions in PIN_VERIFIED state
+     *
      * @param action
      * @param params
      */
@@ -108,21 +113,22 @@ public class ATM {
         switch (action) {
             case SELECT_WITHDRAWAL:
                 currentState = ATMState.TRANSACTION_IN_PROGRESS;
-                System.out.println("Withdrawal selected. Enter amount.");
+                printToConsole("Withdrawal selected. Enter amount.");
                 break;
             case EJECT_CARD:
                 cardValid = false;
                 pinCorrect = false;
                 currentState = ATMState.IDLE;
-                System.out.println("Card ejected. com.example.atm.ATM is idle.");
+                printToConsole("Card ejected. ATM is idle.");
                 break;
             default:
-                System.out.println("Invalid action. Select withdrawal or eject card.");
+                printToConsole("Invalid action. Select withdrawal or eject card.");
         }
     }
 
     /**
      * Handle actions in TRANSACTION_IN_PROGRESS state
+     *
      * @param action
      * @param params
      */
@@ -133,13 +139,13 @@ public class ATM {
                     try {
                         double amount = Double.parseDouble(params[0]);
                         if (performWithdrawal(amount)) {
-                            System.out.println("Withdrawal successful: $" + amount);
-                            System.out.println("Remaining balance: $" + availableBalance);
+                            printToConsole("Withdrawal successful: $" + amount);
+                            printToConsole("Remaining balance: $" + availableBalance);
                         } else {
-                            System.out.println("Withdrawal failed: Insufficient funds or com.example.atm.ATM cash.");
+                            printToConsole("Withdrawal failed: Insufficient funds or ATM cash.");
                         }
                     } catch (NumberFormatException e) {
-                        System.out.println("Invalid amount entered.");
+                        printToConsole("Invalid amount entered.");
                     }
                 }
                 currentState = ATMState.PIN_VERIFIED;
@@ -148,23 +154,25 @@ public class ATM {
                 cardValid = false;
                 pinCorrect = false;
                 currentState = ATMState.IDLE;
-                System.out.println("Card ejected. com.example.atm.ATM is idle.");
+                printToConsole("Card ejected. ATM is idle.");
                 break;
             default:
-                System.out.println("Invalid action. Enter amount or eject card.");
+                printToConsole("Invalid action. Enter amount or eject card.");
         }
     }
 
     /**
      * Handle actions in OUT_OF_SERVICE state
+     *
      * @param action
      */
     private void handleOutOfServiceState(UserAction action) {
-        System.out.println("com.example.atm.ATM is out of service. No actions allowed.");
+        printToConsole("ATM is out of service. No actions allowed.");
     }
 
     /**
      * Validate card number (simple check)
+     *
      * @param cardNumber
      * @return
      */
@@ -175,6 +183,7 @@ public class ATM {
 
     /**
      * Validate PIN (simple check)
+     *
      * @param pin
      * @return
      */
@@ -186,6 +195,7 @@ public class ATM {
 
     /**
      * Perform withdrawal if funds are sufficient
+     *
      * @param amount
      * @return
      */
@@ -197,25 +207,37 @@ public class ATM {
         atmCash -= amount;
         if (atmCash <= 0) {
             currentState = ATMState.OUT_OF_SERVICE;
-            System.out.println("com.example.atm.ATM is out of cash. Moving to out-of-service state.");
+            printToConsole("ATM is out of cash. Moving to out-of-service state.");
         }
         return true;
     }
 
     /**
      * Get the current state of the ATM (for testing/debugging)
+     *
      * @return
      */
     public ATMState getCurrentState() {
         return currentState;
     }
 
+    /**
+     * Prints the current state to the console
+     */
     public void printCurrentState() {
-        System.out.println(CURRENT_STATE + currentState);
+        System.out.printf("%s%s [%s]\n", ConsoleColors.GREEN, CURRENT_STATE, currentState);
+    }
+
+    /**
+     * Prints the current state to the console
+     */
+    public void printToConsole(String message) {
+        System.out.printf("%s%s\n", ConsoleColors.RESET, message);
     }
 
     /**
      * Main method to simulate ATM operations
+     *
      * @param args
      */
     public static void main(String[] args) {
@@ -236,4 +258,19 @@ public class ATM {
         atm.processAction(UserAction.SHUTDOWN);
         atm.printCurrentState();
     }
+}
+
+/**
+ * Color codes for console texts
+ */
+class ConsoleColors {
+    public static final String RESET = "\u001B[0m";
+    public static final String RED = "\u001B[31m";
+    public static final String GREEN = "\u001B[32m";
+    public static final String YELLOW = "\u001B[33m";
+    public static final String BLUE = "\u001B[34m";
+    public static final String PURPLE = "\u001B[35m";
+    public static final String CYAN = "\u001B[36m";
+    public static final String WHITE = "\u001B[37m";
+    // Add more colors as needed
 }
