@@ -11,7 +11,7 @@ Also help the student understand UML tools line PlantUHL (effective text based U
 After 5 min
 
 ## The introduction
-Explain what an UML State Machine Diagram is, notations, operations, conditions and alike.
+Explain what an UML State Machine diagram is, notations, operations, conditions and alike.
 
 ![State Notations](/images/state-notations.png)
 
@@ -26,7 +26,7 @@ Ex. For each state identified, write down:
 
 Ex. of transition notation
 
-State --> Target State : Operation [condition] / Print message to the user.
+From State (originator) --> To State /target) : Operation [condition] / Print message to the user.
 
 CARD_INSERTED : entry / Awaiting PIN
 CARD_INSERTED --> PIN_VERIFIED : ENTER_PIN [valid PIN] / print "PIN verified"
