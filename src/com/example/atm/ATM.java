@@ -14,7 +14,7 @@ public class ATM {
     /**
      * Constructor to initialize the ATM with cash
      *
-     * @param atmCash
+     * @param atmCash is the initial amount of money the ATM has available
      */
     public ATM(double atmCash) {
         this.currentState = ATMState.IDLE;
@@ -27,8 +27,8 @@ public class ATM {
     /**
      * Process user action based on current state
      *
-     * @param action
-     * @param params
+     * @param action from the user
+     * @param params from the user
      */
     public void processAction(UserAction action, String... params) {
         switch (currentState) {
@@ -53,23 +53,16 @@ public class ATM {
     /**
      * Handle actions in IDLE state
      *
-     * @param action
-     * @param params
+     * @param action from the user
+     * @param params from the user
      */
     private void handleIdleState(UserAction action, String[] params) {
         switch (action) {
             case INSERT_CARD:
-                if (params.length > 0 && validateCard(params[0])) {
-                    cardValid = true;
-                    currentState = ATMState.CARD_INSERTED;
-                    printToConsole("Card inserted successfully. Please enter PIN.");
-                } else {
-                    printToConsole("Invalid card. Please try again.");
-                }
+                doInsertCard(params);
                 break;
             case SHUTDOWN:
-                currentState = ATMState.OUT_OF_SERVICE;
-                printToConsole("ATM is now out of service.");
+                doShutdown();
                 break;
             default:
                 printToConsole("Invalid action. Please insert card.");
@@ -79,24 +72,16 @@ public class ATM {
     /**
      * Handle actions in CARD_INSERTED state
      *
-     * @param action
-     * @param params
+     * @param action from the user
+     * @param params from the user
      */
     private void handleCardInsertedState(UserAction action, String[] params) {
         switch (action) {
             case ENTER_PIN:
-                if (params.length > 0 && validatePin(params[0])) {
-                    pinCorrect = true;
-                    currentState = ATMState.PIN_VERIFIED;
-                    printToConsole("PIN verified. Select transaction.");
-                } else {
-                    printToConsole("Invalid PIN. Try again or eject card.");
-                }
+                doEnterPIN(params);
                 break;
             case EJECT_CARD:
-                cardValid = false;
-                currentState = ATMState.IDLE;
-                printToConsole("Card ejected. ATM is idle.");
+                doEjectCard();
                 break;
             default:
                 printToConsole("Invalid action. Please enter PIN or eject card.");
@@ -106,20 +91,16 @@ public class ATM {
     /**
      * Handle actions in PIN_VERIFIED state
      *
-     * @param action
-     * @param params
+     * @param action from the user
+     * @param params from the user
      */
     private void handlePinVerifiedState(UserAction action, String[] params) {
         switch (action) {
             case SELECT_WITHDRAWAL:
-                currentState = ATMState.TRANSACTION_IN_PROGRESS;
-                printToConsole("Withdrawal selected. Enter amount.");
+                doSelectWithdrawal();
                 break;
             case EJECT_CARD:
-                cardValid = false;
-                pinCorrect = false;
-                currentState = ATMState.IDLE;
-                printToConsole("Card ejected. ATM is idle.");
+                doEjectCard();
                 break;
             default:
                 printToConsole("Invalid action. Select withdrawal or eject card.");
@@ -129,32 +110,16 @@ public class ATM {
     /**
      * Handle actions in TRANSACTION_IN_PROGRESS state
      *
-     * @param action
-     * @param params
+     * @param action from the user
+     * @param params from the user
      */
     private void handleTransactionInProgressState(UserAction action, String[] params) {
         switch (action) {
             case WITHDRAW_AMOUNT:
-                if (params.length > 0) {
-                    try {
-                        double amount = Double.parseDouble(params[0]);
-                        if (performWithdrawal(amount)) {
-                            printToConsole("Withdrawal successful: $" + amount);
-                            printToConsole("Remaining balance: $" + availableBalance);
-                        } else {
-                            printToConsole("Withdrawal failed: Insufficient funds or ATM cash.");
-                        }
-                    } catch (NumberFormatException e) {
-                        printToConsole("Invalid amount entered.");
-                    }
-                }
-                currentState = ATMState.PIN_VERIFIED;
+                doWithdrawAmount(params);
                 break;
             case EJECT_CARD:
-                cardValid = false;
-                pinCorrect = false;
-                currentState = ATMState.IDLE;
-                printToConsole("Card ejected. ATM is idle.");
+                doEjectCard();
                 break;
             default:
                 printToConsole("Invalid action. Enter amount or eject card.");
@@ -164,17 +129,96 @@ public class ATM {
     /**
      * Handle actions in OUT_OF_SERVICE state
      *
-     * @param action
+     * @param action from the user
      */
     private void handleOutOfServiceState(UserAction action) {
         printToConsole("ATM is out of service. No actions allowed.");
     }
 
     /**
+     * Withdraws the amount in the params argument
+     *
+     * @param params from the user
+     */
+    private void doWithdrawAmount(String[] params) {
+        if (params.length > 0) {
+            try {
+                double amount = Double.parseDouble(params[0]);
+                if (performWithdrawal(amount)) {
+                    printToConsole("Withdrawal successful: $" + amount);
+                    printToConsole("Remaining balance: $" + availableBalance);
+                } else {
+                    printToConsole("Withdrawal failed: Insufficient funds or ATM cash.");
+                }
+            } catch (NumberFormatException e) {
+                printToConsole("Invalid amount entered.");
+            }
+        }
+        currentState = ATMState.PIN_VERIFIED;
+    }
+
+    /**
+     * Validates the PIN
+     *
+     * @param params from the user
+     */
+    private void doEnterPIN(String[] params) {
+        if (params.length > 0 && validatePin(params[0])) {
+            pinCorrect = true;
+            currentState = ATMState.PIN_VERIFIED;
+            printToConsole("PIN verified. Select transaction.");
+        } else {
+            printToConsole("Invalid PIN. Try again or eject card.");
+        }
+    }
+
+    /**
+     * Validates the card
+     *
+     * @param params from the user
+     */
+    private void doInsertCard(String[] params) {
+        if (params.length > 0 && validateCard(params[0])) {
+            cardValid = true;
+            currentState = ATMState.CARD_INSERTED;
+            printToConsole("Card inserted and card number validated successfully. Please enter PIN.");
+        } else {
+            printToConsole("Invalid card. Please try again.");
+        }
+    }
+
+    /**
+     * Shuts down the ATM
+     */
+    private void doShutdown() {
+        currentState = ATMState.OUT_OF_SERVICE;
+        printToConsole("ATM is now out of service.");
+    }
+
+
+    /**
+     * Handles the withdrawal process and amount input.
+     */
+    private void doSelectWithdrawal() {
+        currentState = ATMState.TRANSACTION_IN_PROGRESS;
+        printToConsole("Withdrawal selected. Enter amount.");
+    }
+
+    /**
+     * Ejects the card
+     */
+    private void doEjectCard() {
+        cardValid = false;
+        pinCorrect = false;
+        currentState = ATMState.IDLE;
+        printToConsole("Card ejected. ATM is idle.");
+    }
+
+    /**
      * Validate card number (simple check)
      *
-     * @param cardNumber
-     * @return
+     * @param cardNumber to validate
+     * @return false is card number is not valid
      */
     private boolean validateCard(String cardNumber) {
         // Simplified validation (e.g., card number length check)
@@ -184,8 +228,8 @@ public class ATM {
     /**
      * Validate PIN (simple check)
      *
-     * @param pin
-     * @return
+     * @param pin code for the card
+     * @return true if PIN is valid
      */
     // Simulate PIN validation
     private boolean validatePin(String pin) {
@@ -196,8 +240,8 @@ public class ATM {
     /**
      * Perform withdrawal if funds are sufficient
      *
-     * @param amount
-     * @return
+     * @param amount to withdraw
+     * @return false if amount is less than 0 or bigger than the available balance
      */
     private boolean performWithdrawal(double amount) {
         if (amount <= 0 || amount > availableBalance || amount > atmCash) {
@@ -213,15 +257,6 @@ public class ATM {
     }
 
     /**
-     * Get the current state of the ATM (for testing/debugging)
-     *
-     * @return
-     */
-    public ATMState getCurrentState() {
-        return currentState;
-    }
-
-    /**
      * Prints the current state to the console
      */
     public void printCurrentState() {
@@ -233,12 +268,14 @@ public class ATM {
      */
     public void printToConsole(String message) {
         System.out.printf("%s%s\n", ConsoleColors.RESET, message);
+        System.out.printf("Card:%b\n", cardValid);
+        System.out.printf("PIN: %b\n", pinCorrect);
     }
 
     /**
      * Main method to simulate ATM operations
      *
-     * @param args
+     * @param args passed from the command line
      */
     public static void main(String[] args) {
         ATM atm = new ATM(5000.0); // ATM with $5000 cash
@@ -253,6 +290,7 @@ public class ATM {
         atm.printCurrentState();
         atm.processAction(UserAction.WITHDRAW_AMOUNT, "200"); // Withdraw $200
         atm.printCurrentState();
+
         atm.processAction(UserAction.EJECT_CARD);
         atm.printCurrentState();
         atm.processAction(UserAction.SHUTDOWN);
@@ -272,5 +310,4 @@ class ConsoleColors {
     public static final String PURPLE = "\u001B[35m";
     public static final String CYAN = "\u001B[36m";
     public static final String WHITE = "\u001B[37m";
-    // Add more colors as needed
 }
