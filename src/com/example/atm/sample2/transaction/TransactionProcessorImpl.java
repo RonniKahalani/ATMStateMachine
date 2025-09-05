@@ -3,8 +3,11 @@ package com.example.atm.sample2.transaction;
 import com.example.atm.sample2.context.ATMContext;
 import com.example.atm.sample2.state.OutOfServiceState;
 
-// Transaction Processor Implementation
+/**
+ * Transaction Processor Implementation
+ */
 public class TransactionProcessorImpl implements TransactionProcessor {
+
     @Override
     public boolean performWithdrawal(ATMContext context, double amount) {
         if (amount <= 0 || amount > context.getAvailableBalance() || amount > context.getAtmCash()) {

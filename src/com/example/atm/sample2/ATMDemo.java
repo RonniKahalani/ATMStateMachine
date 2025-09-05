@@ -10,8 +10,12 @@ import com.example.atm.sample2.validator.PinValidator;
 import com.example.atm.sample2.validator.PinValidatorImpl;
 import com.example.atm.util.ConsoleColors;
 
+/**
+ * ATM Demo main class acting as the user interface.
+ */
 public class ATMDemo {
     public static void main(String[] args) {
+
         // Initialize validators
         CardValidator cardValidator = new CardValidatorImpl();
         PinValidator pinValidator = new PinValidatorImpl();

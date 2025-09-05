@@ -3,23 +3,42 @@ package com.example.atm.sample2.state;
 import com.example.atm.sample2.context.ATMContext;
 import com.example.atm.sample2.user.UserAction;
 
-// PIN Verified State
+/**
+ * PIN Verified State
+ */
 public class PinVerifiedState implements ATMState {
+
     @Override
     public void handleAction(ATMContext context, UserAction action, String... params) {
         switch (action) {
+
             case SELECT_WITHDRAWAL:
-                context.setState(new TransactionInProgressState());
-                System.out.println("Withdrawal selected. Enter amount.");
+                doSelectWithdrawal(context);
                 break;
+
             case EJECT_CARD:
-                context.setCardValid(false);
-                context.setPinCorrect(false);
-                context.setState(new IdleState());
-                System.out.println("Card ejected. ATM is idle.");
+                doEjectCard(context);
                 break;
+
             default:
-                System.out.println("Invalid action. Select withdrawal or eject card.");
+                throw new IllegalArgumentException("Invalid action. Select withdrawal or eject card.");
         }
+    }
+
+    /**
+     * Ejects the card.
+     *
+     * @param context of the ATM
+     */
+    private void doEjectCard(ATMContext context) {
+        context.setCardValid(false);
+        context.setPinCorrect(false);
+        context.setState(new IdleState());
+        System.out.println("Card ejected. ATM is idle.");
+    }
+
+    private void doSelectWithdrawal(ATMContext context) {
+        context.setState(new TransactionInProgressState());
+        System.out.println("Withdrawal selected. Enter amount.");
     }
 }

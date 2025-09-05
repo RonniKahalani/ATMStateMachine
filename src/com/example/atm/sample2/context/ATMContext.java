@@ -9,7 +9,7 @@ import com.example.atm.sample2.validator.PinValidator;
 import java.util.Map;
 
 /**
- *
+ * Holds the context for a given ATM.
  */
 public class ATMContext {
 
