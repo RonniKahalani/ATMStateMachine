@@ -6,8 +6,8 @@ Try to present a real world device and identify the states the device goes throu
 Also help the student understand UML tools line PlantUHL (effective text based UML modelling) and Visual Paradigm (graphical interface)
 
 ## The Learning Process
-- Give every student a chance to think on their own in silence with no digital device, trying to identify the different states an ATM switches between.
-### After 5 minutes
+Give every student a chance to think on their own in silence with no digital device, trying to identify the different states an ATM switches between.
+After some time the student gather in their teams and share their findings
 
 ## The introduction
 Explain the UML State Machine diagram its notations, transitions, activities/actions, conditions and alike.
@@ -36,11 +36,12 @@ CARD_INSERTED --> CARD_INSERTED : ENTER_PIN [invalid PIN] / print "Invalid PIN"
 CARD_INSERTED --> IDLE : EJECT_CARD / print "Card ejected"
 
 ## Step by Step
-Step 1 - For (up to) 5 minutes (NO TALKING). Everyone is on his/her own. (eliminates bias and priming and every student uses their max thinking capacity).
+### Step 1 - For (up to) 5 minutes (NO TALKING)
+- Everyone is on his/her own. (eliminates bias and priming and every student uses their max thinking capacity).
 - Every student is individually asked to spend 5 minutes, in silence with no digital device, trying to identify the different states an ATM switches between.
 - The student writes down every state and transition they found.
 
-Step 2: Share your data with your team.
+### Step 2: Share your data with your team
 - Every team member introduces their findings.
 - The team compromises their finding into one final diagram, using either PlantUML or Visual Paradigm.
 
