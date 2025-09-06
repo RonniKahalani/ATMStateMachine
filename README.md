@@ -7,7 +7,7 @@ Also help the student understand UML tools line PlantUHL (effective text based U
 
 ## The Learning Process
 - Give every student a chance to think on their own in silence with no digital device, trying to identify the different states an ATM switches between.
-After 5 min
+### After 5 minutes
 
 ## The introduction
 Explain the UML State Machine diagram its notations, transitions, activities/actions, conditions and alike.
@@ -25,7 +25,7 @@ Ex. For each state identified, write down:
 
 Ex. of transition notation
 
-From State (originator) --> To State /target) : Operation [condition] / Print message to the user.
+From State (originator) --> To State (target) : Activity [condition] / Print message to the user.
 
 CARD_INSERTED : entry / Awaiting PIN
 CARD_INSERTED --> PIN_VERIFIED : ENTER_PIN [valid PIN] / print "PIN verified"
