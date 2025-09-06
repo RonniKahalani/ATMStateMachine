@@ -28,8 +28,11 @@ Ex. of transition notation
 From State (originator) --> To State (target) : Activity [condition] / Print message to the user.
 
 CARD_INSERTED : entry / Awaiting PIN
+
 CARD_INSERTED --> PIN_VERIFIED : ENTER_PIN [valid PIN] / print "PIN verified"
+
 CARD_INSERTED --> CARD_INSERTED : ENTER_PIN [invalid PIN] / print "Invalid PIN"
+
 CARD_INSERTED --> IDLE : EJECT_CARD / print "Card ejected"
 
 ## Step by Step
