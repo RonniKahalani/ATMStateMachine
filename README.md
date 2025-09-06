@@ -1,17 +1,19 @@
 # ATM State Machine
 This simple Java app, used in computer science classes, illustrates the different states an ATM undergoes and how it could be coded as a prototype.
 
-There are 2 solution examples, a bad one (all code in one class) and a good one (split up into a better cleaner and more testable component architecture), seen from a code quality perspective like the 5 SOLID principles. 
+There are 2 solution examples 
+- The Bad - All code in one class).
+- The Good - Is split up into a better, cleaner and more testable component architecture, seen from a code quality perspective like the 5 SOLID principles. 
 
 ## Purpose
-Try to present a real world device and identify the states the device goes through and what happens in the different states.
+Trying to present a real world device and identify the states the device goes through and what happens in the different states.
 Also help the student understand UML tools line PlantUHL (effective text based UML modelling) and Visual Paradigm (graphical interface)
 
-## The Learning Process
+## Learning Process
 Give every student a chance to think on their own in silence with no digital device, trying to identify the different states an ATM switches between.
 After some time the student gather in their teams and share their findings
 
-## The introduction
+## Introduction
 Explain the UML State Machine diagram its notations, transitions, activities/actions, conditions and alike.
 
 ![State Notations](/images/state-notations.png)
@@ -25,7 +27,7 @@ Ex. For each state identified, write down:
 - Actions/Activities (entry, do, exit) 
 - Transitions: Trigger/[Guard]/Effect conditions (for each transition leaving a state, with print message (for the user).
 
-Ex. of transition notation, using PlantUML State notation syntax: [PlantUML Reference Guide](https://plantuml.com/guide)
+Ex. of transition notation, using PlantUML State notation syntax: [PlantUML Language Reference Guide](https://plantuml.com/guide)
 
 From State (originator) --> To State (target) : Activity [condition] / Print message to the user.
 
