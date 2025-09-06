@@ -116,12 +116,15 @@ public class ATM {
      */
     private void handleTransactionInProgressState(UserAction action, String[] params) {
         switch (action) {
+
             case WITHDRAW_AMOUNT:
                 doWithdrawAmount(params);
                 break;
+
             case EJECT_CARD:
                 doEjectCard();
                 break;
+
             default:
                 printToConsole("Invalid action. Enter amount or eject card.");
         }

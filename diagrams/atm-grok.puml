@@ -35,4 +35,5 @@ state OUT_OF_SERVICE {
   OUT_OF_SERVICE : do / print "ATM is out of service"
 }
 
+OUT_OF_SERVICE --> [*]
 @enduml
