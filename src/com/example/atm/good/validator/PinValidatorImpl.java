@@ -1,4 +1,4 @@
-package com.example.atm.sample2.validator;
+package com.example.atm.good.validator;
 
 /**
  * PIN Validator Implementation

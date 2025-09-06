@@ -1,13 +1,13 @@
-package com.example.atm.sample2;
+package com.example.atm.good;
 
-import com.example.atm.sample2.context.ATMContext;
-import com.example.atm.sample2.transaction.TransactionProcessor;
-import com.example.atm.sample2.transaction.TransactionProcessorImpl;
-import com.example.atm.sample2.user.UserAction;
-import com.example.atm.sample2.validator.CardValidator;
-import com.example.atm.sample2.validator.CardValidatorImpl;
-import com.example.atm.sample2.validator.PinValidator;
-import com.example.atm.sample2.validator.PinValidatorImpl;
+import com.example.atm.good.context.ATMContext;
+import com.example.atm.good.transaction.TransactionProcessor;
+import com.example.atm.good.transaction.TransactionProcessorImpl;
+import com.example.atm.good.user.UserAction;
+import com.example.atm.good.validator.CardValidator;
+import com.example.atm.good.validator.CardValidatorImpl;
+import com.example.atm.good.validator.PinValidator;
+import com.example.atm.good.validator.PinValidatorImpl;
 import com.example.atm.util.ConsoleColors;
 
 /**

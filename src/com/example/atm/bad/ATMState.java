@@ -1,4 +1,4 @@
-package com.example.atm.sample1;
+package com.example.atm.bad;
 
 /**
  * Enum to represent ATM states

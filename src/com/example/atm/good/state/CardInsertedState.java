@@ -1,7 +1,7 @@
-package com.example.atm.sample2.state;
+package com.example.atm.good.state;
 
-import com.example.atm.sample2.context.ATMContext;
-import com.example.atm.sample2.user.UserAction;
+import com.example.atm.good.context.ATMContext;
+import com.example.atm.good.user.UserAction;
 
 /**
  * Card Inserted State

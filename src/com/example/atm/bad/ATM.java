@@ -1,4 +1,4 @@
-package com.example.atm.sample1;
+package com.example.atm.bad;
 
 import com.example.atm.util.ConsoleColors;
 

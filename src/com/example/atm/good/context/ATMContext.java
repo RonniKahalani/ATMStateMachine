@@ -1,10 +1,10 @@
-package com.example.atm.sample2.context;
+package com.example.atm.good.context;
 
-import com.example.atm.sample2.transaction.TransactionProcessor;
-import com.example.atm.sample2.user.UserAction;
-import com.example.atm.sample2.state.*;
-import com.example.atm.sample2.validator.CardValidator;
-import com.example.atm.sample2.validator.PinValidator;
+import com.example.atm.good.transaction.TransactionProcessor;
+import com.example.atm.good.user.UserAction;
+import com.example.atm.good.state.*;
+import com.example.atm.good.validator.CardValidator;
+import com.example.atm.good.validator.PinValidator;
 
 import java.util.Map;
 

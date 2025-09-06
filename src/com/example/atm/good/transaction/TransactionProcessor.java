@@ -1,6 +1,6 @@
-package com.example.atm.sample2.transaction;
+package com.example.atm.good.transaction;
 
-import com.example.atm.sample2.context.ATMContext;
+import com.example.atm.good.context.ATMContext;
 
 /**
  * Interface for transaction processing

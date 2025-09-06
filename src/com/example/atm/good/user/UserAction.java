@@ -1,4 +1,4 @@
-package com.example.atm.sample2.user;
+package com.example.atm.good.user;
 
 /**
  * Enum for user actions

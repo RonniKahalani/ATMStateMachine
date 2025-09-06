@@ -1,4 +1,4 @@
-package com.example.atm.sample2.state;
+package com.example.atm.good.state;
 
 /**
  * Enum for state type identification
