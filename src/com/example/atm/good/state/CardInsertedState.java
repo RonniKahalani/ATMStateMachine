@@ -51,6 +51,7 @@ public class CardInsertedState implements ATMState {
      */
     private void doEjectCard(ATMContext context) {
         context.setCardValid(false);
+        context.setPinCorrect(false);
         context.setState(new IdleState());
         System.out.println("Card ejected. ATM is idle.");
     }

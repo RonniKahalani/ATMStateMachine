@@ -45,10 +45,11 @@ public class IdleState implements ATMState {
      * @param cardNumber to validate
      */
     private void doInsertCard(ATMContext context, String cardNumber) {
+        System.out.println("User inserts card with card number: " + cardNumber);
         if (context.getCardValidator().validateCard(cardNumber)) {
             context.setCardValid(true);
             context.setState(new CardInsertedState());
-            System.out.println("Card inserted successfully. Please enter PIN.");
+            System.out.println("Valid card inserted successfully. Please enter PIN.");
         } else {
             throw new IllegalArgumentException("Invalid card. Please try again.");
         }

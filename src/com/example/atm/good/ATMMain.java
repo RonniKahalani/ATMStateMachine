@@ -24,7 +24,7 @@ public class ATMMain {
         // Initialize ATM with $5000 cash
         ATMContext atm = new ATMContext(cardValidator, pinValidator, transactionProcessor, 5000.0);
 
-        // Simulate ATM usage
+        // Simulate ATM usage scenario
         printCurrentState(atm);
         atm.processAction(UserAction.INSERT_CARD, "1234567890123456"); // Valid card
         printCurrentState(atm);
