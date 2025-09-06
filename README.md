@@ -25,22 +25,19 @@ Ex. For each state identified, write down:
 - Actions/Activities (entry, do, exit) 
 - Transitions: Trigger/[Guard]/Effect conditions (for each transition leaving a state, with print message (for the user).
 
-Ex. of transition notation
+Ex. of transition notation, using PlantUML State notation syntax: [PlantUML Reference Guide](https://plantuml.com/guide)
 
 From State (originator) --> To State (target) : Activity [condition] / Print message to the user.
 
-CARD_INSERTED : entry / Awaiting PIN
-
-CARD_INSERTED --> PIN_VERIFIED : ENTER_PIN [valid PIN] / print "PIN verified"
-
-CARD_INSERTED --> CARD_INSERTED : ENTER_PIN [invalid PIN] / print "Invalid PIN"
-
-CARD_INSERTED --> IDLE : EJECT_CARD / print "Card ejected"
+- CARD_INSERTED : entry / Awaiting PIN
+- CARD_INSERTED --> PIN_VERIFIED : ENTER_PIN [valid PIN] / print "PIN verified"
+- CARD_INSERTED --> CARD_INSERTED : ENTER_PIN [invalid PIN] / print "Invalid PIN"
+- CARD_INSERTED --> IDLE : EJECT_CARD / print "Card ejected"
 
 ## Step by Step
 ### Step 1 - For (up to) 5 minutes (NO TALKING)
-- Everyone is on his/her own. (eliminates bias and priming and every student uses their max thinking capacity).
-- Every student is individually asked to spend 5 minutes, in silence with no digital device, trying to identify the different states an ATM switches between.
+- Everyone is on their own, which eliminates bias and priming, so every student use their max thinking capacity.
+- Every student spends 5 minutes, in silence with no digital devices, trying to identify the different states an ATM switches between.
 - The student writes down every state and transition they found.
 
 ### Step 2: Share your data with your team
