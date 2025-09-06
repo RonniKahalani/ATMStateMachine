@@ -1,7 +1,7 @@
 # ATM State Machine
 This simple Java app, used in computer science classes, illustrates the different states an ATM undergoes and how it could be coded as a prototype.
 
-There are 2 solution examples, one bad one and one nice one, seen from a code quality perspective like the 5 SOLID principles. 
+There are 2 solution examples, a bad one (all code in one class) and a good one (split up into a better cleaner and more testable component architecture), seen from a code quality perspective like the 5 SOLID principles. 
 
 ## Purpose
 Try to present a real world device and identify the states the device goes through and what happens in the different states.
