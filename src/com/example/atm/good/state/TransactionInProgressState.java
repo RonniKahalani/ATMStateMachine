@@ -55,6 +55,7 @@ public class TransactionInProgressState implements ATMState {
      * @param amount  amount to be withdrawn
      */
     private void doWithdrawAmount(ATMContext context, double amount) {
+        System.out.println("User enters amount:" + amount);
         if (context.getTransactionProcessor().performWithdrawal(context, amount)) {
             System.out.println("Withdrawal successful: $" + amount);
             System.out.println("Remaining balance: $" + context.getAvailableBalance());

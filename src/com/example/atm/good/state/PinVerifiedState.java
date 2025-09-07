@@ -38,6 +38,7 @@ public class PinVerifiedState implements ATMState {
     }
 
     private void doSelectWithdrawal(ATMContext context) {
+        System.out.println("User selects withdrawal transaction.");
         context.setState(new TransactionInProgressState());
         System.out.println("Withdrawal selected. Enter amount.");
     }

@@ -35,6 +35,7 @@ public class CardInsertedState implements ATMState {
      * @param pin     for the card
      */
     private void doEnterPin(ATMContext context, String pin) {
+        System.out.printf("User enters PIN %s.\n", pin);
         if (pin != null && !pin.isEmpty() && context.getPinValidator().validatePin(pin)) {
             context.setPinCorrect(true);
             context.setState(new PinVerifiedState());
