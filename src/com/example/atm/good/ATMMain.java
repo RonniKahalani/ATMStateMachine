@@ -1,12 +1,9 @@
 package com.example.atm.good;
 
 import com.example.atm.good.context.ATMContext;
-import com.example.atm.good.transaction.TransactionProcessor;
 import com.example.atm.good.transaction.TransactionProcessorImpl;
 import com.example.atm.good.user.UserAction;
-import com.example.atm.good.validator.CardValidator;
 import com.example.atm.good.validator.CardValidatorImpl;
-import com.example.atm.good.validator.PinValidator;
 import com.example.atm.good.validator.PinValidatorImpl;
 import com.example.atm.util.ConsoleColors;
 
@@ -16,13 +13,8 @@ import com.example.atm.util.ConsoleColors;
 public class ATMMain {
     public static void main(String[] args) {
 
-        // Initialize validators
-        CardValidator cardValidator = new CardValidatorImpl();
-        PinValidator pinValidator = new PinValidatorImpl();
-        TransactionProcessor transactionProcessor = new TransactionProcessorImpl();
-
-        // Initialize ATM with $5000 cash
-        ATMContext atm = new ATMContext(cardValidator, pinValidator, transactionProcessor, 5000.0);
+        // Initialize ATM with validators and $5000 cash
+        ATMContext atm = new ATMContext(new CardValidatorImpl(), new PinValidatorImpl(), new TransactionProcessorImpl(), 5000.0);
 
         // Simulate ATM usage scenario
         printCurrentState(atm);
