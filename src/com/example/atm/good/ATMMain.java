@@ -22,7 +22,7 @@ public class ATMMain {
         printCurrentState(atm);
         atm.processAction(UserAction.ENTER_PIN, "1234"); // Valid PIN
         printCurrentState(atm);
-        atm.processAction(UserAction.SELECT_WITHDRAWAL);
+        atm.processAction(UserAction.SELECT_WITHDRAWAL); // Select withdrawal transaction
         printCurrentState(atm);
         atm.processAction(UserAction.WITHDRAW_AMOUNT, "200"); // Withdraw $200
         printCurrentState(atm);
