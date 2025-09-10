@@ -1,7 +1,7 @@
 @startuml ATM State Machine
 
 [*] --> IDLE
-
+kjshfksjdhfkjshf
 state IDLE {
   IDLE : entry / Waiting for card
   IDLE --> CARD_INSERTED : INSERT_CARD [valid card] / print "Card inserted successfully"
